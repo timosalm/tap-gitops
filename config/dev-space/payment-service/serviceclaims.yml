@@ -2,8 +2,7 @@ apiVersion: servicebinding.io/v1alpha3
 kind: ServiceBinding
 metadata:
   name: payment-service-config-server
-  annotations:
-    autoscaling.knative.dev/min-scale: "1"
+  annotations: {}
   labels:
     app.kubernetes.io/part-of: payment-service
     apps.tanzu.vmware.com/has-tests: "true"
@@ -25,8 +24,7 @@ apiVersion: servicebinding.io/v1alpha3
 kind: ServiceBinding
 metadata:
   name: payment-service-auth-client
-  annotations:
-    autoscaling.knative.dev/min-scale: "1"
+  annotations: {}
   labels:
     app.kubernetes.io/part-of: payment-service
     apps.tanzu.vmware.com/has-tests: "true"
@@ -48,8 +46,7 @@ apiVersion: servicebinding.io/v1alpha3
 kind: ServiceBinding
 metadata:
   name: payment-service-observability
-  annotations:
-    autoscaling.knative.dev/min-scale: "1"
+  annotations: {}
   labels:
     app.kubernetes.io/part-of: payment-service
     apps.tanzu.vmware.com/has-tests: "true"
