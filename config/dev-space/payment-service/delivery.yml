@@ -15,7 +15,6 @@ spec:
   template:
     metadata:
       annotations:
-        autoscaling.knative.dev/min-scale: "1"
         boot.spring.io/actuator: http://:8081/actuator
         boot.spring.io/version: 2.7.5
         conventions.carto.run/applied-conventions: |-
@@ -45,7 +44,7 @@ spec:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details=always -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include=* -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: harbor.emea.end2end.link/tap/workloads/payment-service-dev-space@sha256:45d5f9bc55e5fd8e6a98eeb226a5bf6d662817785749ad315b0391e57426fbb3
+        image: harbor.emea.end2end.link/tap/workloads/payment-service-dev-space@sha256:c5a3cdae10068785b7a29a8123b9b13e341d4a39f233d9a88e17bb81bbf0c036
         livenessProbe:
           httpGet:
             path: /livez
