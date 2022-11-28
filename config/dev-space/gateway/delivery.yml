@@ -50,7 +50,7 @@ spec:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details=always -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include=* -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080"
-        image: harbor.emea.end2end.link/tap/workloads/gateway-dev-space@sha256:96dcf47cc4117def93d6e5d41da89ef3f7698b88f630776fb285743ca13ef7e2
+        image: harbor.emea.end2end.link/tap/workloads/gateway-dev-space@sha256:2b4adc471de9e8a77011a54b7af424d637fdbdd51475794c7cc4b4d03f111596
         livenessProbe:
           httpGet:
             path: /livez
