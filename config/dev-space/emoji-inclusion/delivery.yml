@@ -28,7 +28,7 @@ spec:
           appliveview-sample/app-live-view-systemproperties
         developer.conventions/target-containers: workload
         kubectl.kubernetes.io/last-applied-configuration: |
-          {"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{},"labels":{"apps.tanzu.vmware.com/workload-type":"web"},"name":"emoji-inclusion","namespace":"dev-space"},"spec":{"build":{"env":[{"name":"BP_JVM_VERSION","value":"17"}]},"source":{"git":{"ref":{"branch":"main"},"url":"https://github.com/tsalm-pivotal/emoji-inclusion.git"}}}}
+          {"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{},"labels":{"apps.tanzu.vmware.com/workload-type":"web"},"name":"emoji-inclusion","namespace":"dev-space"},"spec":{"build":{"env":[{"name":"BP_JVM_VERSION","value":"17"}]},"serviceClaims":[{"name":"db","ref":{"apiVersion":"services.apps.tanzu.vmware.com/v1alpha1","kind":"ResourceClaim","name":"db-binding-compatible"}}],"source":{"git":{"ref":{"branch":"main"},"url":"https://github.com/tsalm-pivotal/emoji-inclusion.git"}}}}
         services.conventions.apps.tanzu.vmware.com/postgres: postgresql/42.3.8
       labels:
         app.kubernetes.io/component: run
