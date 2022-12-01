@@ -26,7 +26,7 @@ spec:
         carto.run/workload-name: frontend
     spec:
       containers:
-      - image: harbor.emea.end2end.link/tap-wkld/frontend-dev-space@sha256:d734c27e3ddea58622e1a2f2cb1d20be000eb7123859d5bc40f6ec183520f37c
+      - image: harbor.emea.end2end.link/tap-wkld/frontend-dev-space@sha256:a96ed0a8548b2ab8a7af7e1e544aa5c9ca4190ea61eb627de72008fbb20e8ccc
         name: workload
         resources: {}
         securityContext:
