@@ -33,6 +33,7 @@ spec:
         developer.conventions/target-containers: workload
         services.conventions.apps.tanzu.vmware.com/postgres: postgresql/42.3.8
       labels:
+        apis.apps.tanzu.vmware.com/register-api: "true"
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: inclusion
         apps.tanzu.vmware.com/has-tests: "true"
