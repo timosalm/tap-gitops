@@ -33,7 +33,7 @@ spec:
           spring-boot-convention/app-live-view-connector-boot
           spring-boot-convention/app-live-view-appflavours-boot
           appliveview-sample/app-live-view-appflavour-check
-        developer.apps.tanzu.vmware.com/image-source-digest: harbor.emea.end2end.link/tap-wkld/vs-code-plugin:latest@sha256:f2f826e471a7b81d3fd5c700981e0794a7bc939ef28d0015f1696e7c95c9e972
+        developer.apps.tanzu.vmware.com/image-source-digest: harbor.emea.end2end.link/tap-wkld/vs-code-plugin:latest@sha256:ddae0eeda60dd227d543a46da0290dea72549ca89dc7fd771115618a10368d42
         developer.conventions/target-containers: workload
       labels:
         app.kubernetes.io/component: run
@@ -56,7 +56,7 @@ spec:
           value: "9005"
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.health.probes.enabled="true" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: harbor.emea.end2end.link/tap/workloads/payment-service-dev-space@sha256:7d19b8078e6f5004b8d70a166630ee2616645d501a719bdb1fdf04d1ccb4b57f
+        image: harbor.emea.end2end.link/tap/workloads/payment-service-dev-space@sha256:18d492221c0b5f6e8588cb20cb13a3a08bbd4ce547b81c5b914e7b9d5a8d93a0
         livenessProbe:
           httpGet:
             path: /livez
