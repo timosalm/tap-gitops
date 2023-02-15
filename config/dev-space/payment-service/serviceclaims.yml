@@ -20,7 +20,6 @@ metadata:
   annotations: {}
   labels:
     app.kubernetes.io/part-of: payment-service
-    apps.tanzu.vmware.com/has-tests: "true"
     apps.tanzu.vmware.com/workload-type: web
     app.kubernetes.io/component: run
     carto.run/workload-name: payment-service
@@ -42,7 +41,6 @@ metadata:
   annotations: {}
   labels:
     app.kubernetes.io/part-of: payment-service
-    apps.tanzu.vmware.com/has-tests: "true"
     apps.tanzu.vmware.com/workload-type: web
     app.kubernetes.io/component: run
     carto.run/workload-name: payment-service
@@ -64,7 +62,6 @@ metadata:
   annotations: {}
   labels:
     app.kubernetes.io/part-of: payment-service
-    apps.tanzu.vmware.com/has-tests: "true"
     apps.tanzu.vmware.com/workload-type: web
     app.kubernetes.io/component: run
     carto.run/workload-name: payment-service
