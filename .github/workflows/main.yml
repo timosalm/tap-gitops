@@ -11,18 +11,3 @@ jobs:
     - uses: hmarr/auto-approve-action@v3
       with:
         review-message: "Auto approved automated PR"
-  auto-merge: 
-    runs-on: ubuntu-latest
-    needs: auto-approve
-    permissions:
-      pull-requests: write
-      contents: write
-    steps:
-    - uses: actions/github-script@v6
-      with:
-        script: |
-          await github.rest.pulls.merge({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            pull_number: context.payload.pull_request.number
-          })
