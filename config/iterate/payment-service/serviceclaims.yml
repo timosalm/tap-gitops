@@ -17,7 +17,8 @@ apiVersion: servicebinding.io/v1alpha3
 kind: ServiceBinding
 metadata:
   name: payment-service-config-server
-  annotations: {}
+  annotations:
+    kapp.k14s.io/change-group: servicebinding.io/ServiceBindings
   labels:
     app.kubernetes.io/part-of: payment-service
     apps.tanzu.vmware.com/workload-type: web
@@ -38,7 +39,8 @@ apiVersion: servicebinding.io/v1alpha3
 kind: ServiceBinding
 metadata:
   name: payment-service-observability
-  annotations: {}
+  annotations:
+    kapp.k14s.io/change-group: servicebinding.io/ServiceBindings
   labels:
     app.kubernetes.io/part-of: payment-service
     apps.tanzu.vmware.com/workload-type: web
