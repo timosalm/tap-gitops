@@ -5,6 +5,7 @@ metadata:
   annotations:
     kapp.k14s.io/update-strategy: fallback-on-replace
     ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
+    kapp.k14s.io/change-rule: upsert after upserting servicebinding.io/ServiceBindings
   labels:
     app.kubernetes.io/part-of: shipping-service
     apps.tanzu.vmware.com/has-tests: "true"
