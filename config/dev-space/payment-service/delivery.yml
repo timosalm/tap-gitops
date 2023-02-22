@@ -5,6 +5,7 @@ metadata:
   annotations:
     ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
     ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
+    kapp.k14s.io/change-rule: upsert after upserting servicebinding.io/ServiceBindings
   labels:
     app.kubernetes.io/part-of: payment-service
     apps.tanzu.vmware.com/has-tests: "true"
@@ -46,7 +47,7 @@ spec:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.health.probes.enabled="true" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: harbor.emea.end2end.link/tap/workloads/payment-service-dev-space@sha256:e04a73937acab9f1be37fd3f694ff7b373646525e02f856ec35fb92618be260b
+        image: harbor.emea.end2end.link/tap/workloads/payment-service-dev-space@sha256:dfb9461b6f47e670c16b4b7e6addae13f7b8a6819c82b7a7980bdf11b35b6003
         livenessProbe:
           httpGet:
             path: /livez
