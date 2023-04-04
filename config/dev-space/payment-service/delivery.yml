@@ -40,7 +40,7 @@ spec:
         tanzu.app.live.view.application.name: payment-service
     spec:
       containers:
-      - image: harbor.emea.end2end.link/tap/workloads/payment-service-dev-space@sha256:3193f548009217401b931f05558795ea6a55ada619402d8afe1655a2fb9c3578
+      - image: harbor.emea.end2end.link/tap/workloads/payment-service-dev-space@sha256:a5c8f05c765d60f9918180b3329cdd563d07b6e96d6474b3868c92bd431e1ef6
         name: workload
         resources: {}
         securityContext:
