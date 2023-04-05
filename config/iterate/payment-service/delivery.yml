@@ -17,28 +17,61 @@ spec:
       annotations:
         apps.tanzu.vmware.com/debug: "true"
         apps.tanzu.vmware.com/live-update: "true"
-        autoscaling.knative.dev/min-scale: "1"
+        autoscaling.knative.dev/maxScale: "1"
+        autoscaling.knative.dev/minScale: "1"
+        boot.spring.io/version: 2.7.5
         conventions.carto.run/applied-conventions: |-
+          developer-conventions/debug-convention
+          developer-conventions/live-update-convention
           developer-conventions/add-source-image-label
           spring-boot-convention/auto-configure-actuators-check
+          spring-boot-convention/spring-boot
+          spring-boot-convention/spring-boot-graceful-shutdown
+          spring-boot-convention/spring-boot-web
+          spring-boot-convention/spring-boot-actuator
+          spring-boot-convention/spring-boot-actuator-probes
           spring-boot-convention/app-live-view-appflavour-check
+          spring-boot-convention/app-live-view-connector-boot
+          spring-boot-convention/app-live-view-appflavours-boot
           appliveview-sample/app-live-view-appflavour-check
-          appliveview-sample/app-live-view-connector-steeltoe
-          appliveview-sample/app-live-view-appflavours-steeltoe
-        developer.apps.tanzu.vmware.com/image-source-digest: harbor.emea.end2end.link/tap-wkld/vs-code-plugin:latest@sha256:51d153fbb299ec774656d0848f2d86a27bad18ac80c476b2dd9db0d60e69acf1
+        developer.apps.tanzu.vmware.com/image-source-digest: harbor.emea.end2end.link/tap-wkld/vs-code-plugin:latest@sha256:9416adfbb6c63b163e135567f1edd8016e78ba605b81ebda2bb839dc49d5d552
         developer.conventions/target-containers: workload
       labels:
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: payment-service
+        apps.tanzu.vmware.com/auto-configure-actuators: "false"
         apps.tanzu.vmware.com/workload-type: web
         carto.run/workload-name: payment-service
+        conventions.carto.run/framework: spring-boot
         tanzu.app.live.view: "true"
-        tanzu.app.live.view.application.flavours: steeltoe
+        tanzu.app.live.view.application.actuator.path: actuator
+        tanzu.app.live.view.application.actuator.port: "8080"
+        tanzu.app.live.view.application.flavours: spring-boot
         tanzu.app.live.view.application.name: payment-service
     spec:
       containers:
-      - image: harbor.emea.end2end.link/tap/workloads/payment-service-iterate@sha256:4959e1c54581ff04859930fcdafb5dc2a272f89bad18b0271e47785541803b5f
+      - env:
+        - name: BPL_DEBUG_ENABLED
+          value: "true"
+        - name: BPL_DEBUG_PORT
+          value: "9005"
+        - name: JAVA_TOOL_OPTIONS
+          value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.health.probes.enabled="true" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
+        image: harbor.emea.end2end.link/tap/workloads/payment-service-iterate@sha256:e79c817875dde5ed0ff6f1c83c980092740de2475d3d8c872a8b05c2cd4f0fb1
+        livenessProbe:
+          httpGet:
+            path: /livez
+            port: 8080
+            scheme: HTTP
         name: workload
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8080
+            scheme: HTTP
         resources: {}
         securityContext:
           runAsUser: 1000

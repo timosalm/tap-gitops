@@ -18,7 +18,6 @@ kind: ServiceBinding
 metadata:
   name: payment-service-config-server
   annotations:
-    autoscaling.knative.dev/min-scale: "1"
     kapp.k14s.io/change-group: servicebinding.io/ServiceBindings
   labels:
     app.kubernetes.io/part-of: payment-service
@@ -41,7 +40,6 @@ kind: ServiceBinding
 metadata:
   name: payment-service-observability
   annotations:
-    autoscaling.knative.dev/min-scale: "1"
     kapp.k14s.io/change-group: servicebinding.io/ServiceBindings
   labels:
     app.kubernetes.io/part-of: payment-service
