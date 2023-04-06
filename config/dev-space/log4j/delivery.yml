@@ -32,7 +32,7 @@ spec:
         conventions.carto.run/framework: spring-boot
     spec:
       containers:
-      - image: harbor.emea.end2end.link/tap/workloads/log4j-dev-space@sha256:1c5f7d2d60936e0f5de64783a1b2da4e6d082f11ced71a9877d87a68a246e111
+      - image: harbor.emea.end2end.link/tap/workloads/log4j-dev-space@sha256:442f0f142f03046cacd926d290527107d1c3b86d2226a3c35225dbdefae60d98
         name: workload
         resources: {}
         securityContext:
