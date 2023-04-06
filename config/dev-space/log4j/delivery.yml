@@ -16,7 +16,7 @@ spec:
   template:
     metadata:
       annotations:
-        boot.spring.io/version: 3.0.5
+        boot.spring.io/version: 2.6.0
         conventions.carto.run/applied-conventions: |-
           spring-boot-convention/auto-configure-actuators-check
           spring-boot-convention/spring-boot
@@ -32,7 +32,7 @@ spec:
         conventions.carto.run/framework: spring-boot
     spec:
       containers:
-      - image: harbor.emea.end2end.link/tap/workloads/log4j-dev-space@sha256:442f0f142f03046cacd926d290527107d1c3b86d2226a3c35225dbdefae60d98
+      - image: harbor.emea.end2end.link/tap/workloads/log4j-dev-space@sha256:5d2eb9913c43902d47ed9dc6a6cba85de44c51675d8275f705a6f2f11e5bc29e
         name: workload
         resources: {}
         securityContext:
