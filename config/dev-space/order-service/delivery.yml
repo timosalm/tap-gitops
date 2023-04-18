@@ -58,7 +58,7 @@ spec:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.health.probes.enabled="true" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: harbor.emea.end2end.link/tap/workloads/order-service-dev-space@sha256:1abc444e267254acd1a2a1cc676c290762d7da1081bcd11c8432ade152cdf0d0
+        image: harbor.emea.end2end.link/tap/workloads/order-service-dev-space@sha256:23009e2de8784cd82bfca56e773db87b936ebbb2d15296251a3ec8b452f99eb4
         livenessProbe:
           httpGet:
             path: /livez
