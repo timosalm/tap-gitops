@@ -17,8 +17,14 @@ spec:
       annotations:
         apps.tanzu.vmware.com/debug: "true"
         apps.tanzu.vmware.com/live-update: "true"
+        autoscaling.knative.dev/maxScale: "1"
+        autoscaling.knative.dev/minScale: "1"
         boot.spring.io/version: 2.7.5
         conventions.carto.run/applied-conventions: |-
+          appliveview-sample/app-live-view-appflavour-check
+          developer-conventions/debug-convention
+          developer-conventions/live-update-convention
+          developer-conventions/add-source-image-label
           spring-boot-convention/auto-configure-actuators-check
           spring-boot-convention/spring-boot
           spring-boot-convention/spring-boot-graceful-shutdown
@@ -28,6 +34,7 @@ spec:
           spring-boot-convention/app-live-view-appflavour-check
           spring-boot-convention/app-live-view-connector-boot
           spring-boot-convention/app-live-view-appflavours-boot
+        developer.apps.tanzu.vmware.com/image-source-digest: harbor.emea.end2end.link/tap-wkld/vs-code-plugin:latest@sha256:3514969f541905a682a0a9142bb21e80c1ee8288d62c7bff0e8ae37c762fa297
         developer.conventions/target-containers: workload
       labels:
         app.kubernetes.io/component: run
@@ -44,9 +51,13 @@ spec:
     spec:
       containers:
       - env:
+        - name: BPL_DEBUG_ENABLED
+          value: "true"
+        - name: BPL_DEBUG_PORT
+          value: "9005"
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.health.probes.enabled="true" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: harbor.emea.end2end.link/tap/workloads/payment-service-iterate@sha256:96ca0929e916d0ce096cff2b40cc248c2825d137b67116945edbbd8f325f7bb8
+        image: harbor.emea.end2end.link/tap/workloads/payment-service-iterate@sha256:b5388e20b77e32fb8e2190be5624917ff9a7c7bee47d72ce4eb1d855b992a291
         livenessProbe:
           httpGet:
             path: /livez
