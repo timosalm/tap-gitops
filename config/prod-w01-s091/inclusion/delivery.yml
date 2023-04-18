@@ -20,6 +20,7 @@ spec:
         autoscaling.knative.dev/min-scale: "5"
         boot.spring.io/version: 2.7.6
         conventions.carto.run/applied-conventions: |-
+          appliveview-sample/app-live-view-appflavour-check
           spring-boot-convention/auto-configure-actuators-check
           spring-boot-convention/spring-boot
           spring-boot-convention/spring-boot-graceful-shutdown
@@ -30,7 +31,6 @@ spec:
           spring-boot-convention/app-live-view-connector-boot
           spring-boot-convention/app-live-view-appflavours-boot
           spring-boot-convention/service-intent-postgres
-          appliveview-sample/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         services.conventions.carto.run/postgres: postgresql/42.3.8
       labels:
