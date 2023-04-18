@@ -8,6 +8,7 @@ metadata:
     kapp.k14s.io/change-rule: upsert after upserting servicebinding.io/ServiceBindings
   labels:
     app.kubernetes.io/part-of: payment-service
+    apps.tanzu.vmware.com/auto-configure-actuators: "true"
     apps.tanzu.vmware.com/has-tests: "true"
     apps.tanzu.vmware.com/workload-type: web
     app.kubernetes.io/component: run
@@ -16,6 +17,7 @@ spec:
   template:
     metadata:
       annotations:
+        boot.spring.io/actuator: http://:8081/actuator
         boot.spring.io/version: 2.7.5
         conventions.carto.run/applied-conventions: |-
           appliveview-sample/app-live-view-appflavour-check
@@ -29,24 +31,26 @@ spec:
           spring-boot-convention/app-live-view-connector-boot
           spring-boot-convention/app-live-view-appflavours-boot
         developer.conventions/target-containers: workload
+        kubectl.kubernetes.io/last-applied-configuration: |
+          {"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{},"labels":{"app.kubernetes.io/part-of":"payment-service","apps.tanzu.vmware.com/auto-configure-actuators":"true","apps.tanzu.vmware.com/has-tests":"true","apps.tanzu.vmware.com/workload-type":"web"},"name":"payment-service","namespace":"dev-space"},"spec":{"build":{"env":[{"name":"BP_JVM_VERSION","value":"17"}]},"serviceClaims":[{"name":"config-server","ref":{"apiVersion":"services.apps.tanzu.vmware.com/v1alpha1","kind":"ResourceClaim","name":"configserver-binding-compatible"}},{"name":"observability","ref":{"apiVersion":"services.apps.tanzu.vmware.com/v1alpha1","kind":"ResourceClaim","name":"observability-binding-compatible"}}],"source":{"git":{"ref":{"branch":"main"},"url":"https://github.com/tsalm-vmware/payment-service.git"}}}}
       labels:
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: payment-service
-        apps.tanzu.vmware.com/auto-configure-actuators: "false"
+        apps.tanzu.vmware.com/auto-configure-actuators: "true"
         apps.tanzu.vmware.com/has-tests: "true"
         apps.tanzu.vmware.com/workload-type: web
         carto.run/workload-name: payment-service
         conventions.carto.run/framework: spring-boot
         tanzu.app.live.view: "true"
         tanzu.app.live.view.application.actuator.path: actuator
-        tanzu.app.live.view.application.actuator.port: "8080"
+        tanzu.app.live.view.application.actuator.port: "8081"
         tanzu.app.live.view.application.flavours: spring-boot
         tanzu.app.live.view.application.name: payment-service
     spec:
       containers:
       - env:
         - name: JAVA_TOOL_OPTIONS
-          value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.health.probes.enabled="true" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
+          value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
         image: harbor.emea.end2end.link/tap/workloads/payment-service-dev-space@sha256:7ddfc2f548033e9c8e6bc03189929966aafe415bb3bb9f57e5c3b9e8c63f8f42
         livenessProbe:
           httpGet:
