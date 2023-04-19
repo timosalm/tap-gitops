@@ -21,6 +21,7 @@ metadata:
     kapp.k14s.io/change-group: servicebinding.io/ServiceBindings
   labels:
     app.kubernetes.io/part-of: payment-service
+    apps.tanzu.vmware.com/auto-configure-actuators: "true"
     apps.tanzu.vmware.com/workload-type: web
     app.kubernetes.io/component: run
     carto.run/workload-name: payment-service
@@ -43,6 +44,7 @@ metadata:
     kapp.k14s.io/change-group: servicebinding.io/ServiceBindings
   labels:
     app.kubernetes.io/part-of: payment-service
+    apps.tanzu.vmware.com/auto-configure-actuators: "true"
     apps.tanzu.vmware.com/workload-type: web
     app.kubernetes.io/component: run
     carto.run/workload-name: payment-service
