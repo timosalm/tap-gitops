@@ -18,6 +18,7 @@ spec:
       annotations:
         boot.spring.io/version: 2.7.8
         conventions.carto.run/applied-conventions: |-
+          appliveview-sample/app-live-view-appflavour-check
           spring-boot-convention/auto-configure-actuators-check
           spring-boot-convention/spring-boot
           spring-boot-convention/spring-boot-graceful-shutdown
@@ -27,7 +28,6 @@ spec:
           spring-boot-convention/app-live-view-appflavour-check
           spring-boot-convention/app-live-view-connector-boot
           spring-boot-convention/app-live-view-appflavours-boot
-          appliveview-sample/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
       labels:
         app.kubernetes.io/component: run
@@ -47,7 +47,7 @@ spec:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.health.probes.enabled="true" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: harbor.emea.end2end.link/tap/workloads/hello-world-dev-space@sha256:b65c3701a49d034428e65fab0c9b19d2e1c709bc004fe019724472e68a06e970
+        image: harbor.emea.end2end.link/tap/workloads/hello-world-dev-space@sha256:295068334d65ea815de55813698c8963dfd36acb422ec833d5a4dc8ff71d2003
         livenessProbe:
           httpGet:
             path: /livez
