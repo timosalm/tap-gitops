@@ -18,6 +18,7 @@ spec:
     metadata:
       annotations:
         autoscaling.knative.dev/min-scale: "1"
+        boot.spring.io/actuator: http://:8081/actuator
         boot.spring.io/version: 2.7.2
         conventions.carto.run/applied-conventions: |-
           appliveview-sample/app-live-view-appflavour-check
@@ -38,22 +39,22 @@ spec:
         apis.apps.tanzu.vmware.com/register-api: "true"
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: gateway
-        apps.tanzu.vmware.com/auto-configure-actuators: "false"
+        apps.tanzu.vmware.com/auto-configure-actuators: "true"
         apps.tanzu.vmware.com/has-tests: "true"
         apps.tanzu.vmware.com/workload-type: web
         carto.run/workload-name: gateway
         conventions.carto.run/framework: spring-boot
         tanzu.app.live.view: "true"
         tanzu.app.live.view.application.actuator.path: actuator
-        tanzu.app.live.view.application.actuator.port: "8080"
+        tanzu.app.live.view.application.actuator.port: "8081"
         tanzu.app.live.view.application.flavours: spring-boot_spring-cloud-gateway
         tanzu.app.live.view.application.name: gateway
     spec:
       containers:
       - env:
         - name: JAVA_TOOL_OPTIONS
-          value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.health.probes.enabled="true" -Dserver.port="8080"
-        image: harbor.emea.end2end.link/tap/workloads/gateway-dev-space@sha256:f515bd3119ebd766524474bee9a0529ccdb66e1dacfa406c8d93a9419bddc795
+          value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080"
+        image: harbor.emea.end2end.link/tap/workloads/gateway-dev-space@sha256:4108399fca46fcbfbb8cac847f28b6ccd4f012d7eadbeac084d80a83b40bf7cb
         livenessProbe:
           httpGet:
             path: /livez
