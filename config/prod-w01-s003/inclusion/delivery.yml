@@ -5,6 +5,7 @@ metadata:
   annotations:
     ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
     ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
+    kapp.k14s.io/change-rule: upsert after upserting servicebinding.io/ServiceBindings
   labels:
     apis.apps.tanzu.vmware.com/register-api: "true"
     app.kubernetes.io/part-of: inclusion
@@ -17,8 +18,10 @@ spec:
     metadata:
       annotations:
         autoscaling.knative.dev/min-scale: "5"
+        boot.spring.io/actuator: http://:8081/actuator
         boot.spring.io/version: 2.7.6
         conventions.carto.run/applied-conventions: |-
+          appliveview-sample/app-live-view-appflavour-check
           spring-boot-convention/auto-configure-actuators-check
           spring-boot-convention/spring-boot
           spring-boot-convention/spring-boot-graceful-shutdown
@@ -29,14 +32,13 @@ spec:
           spring-boot-convention/app-live-view-connector-boot
           spring-boot-convention/app-live-view-appflavours-boot
           spring-boot-convention/service-intent-postgres
-          appliveview-sample/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         services.conventions.carto.run/postgres: postgresql/42.3.8
       labels:
         apis.apps.tanzu.vmware.com/register-api: "true"
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: inclusion
-        apps.tanzu.vmware.com/auto-configure-actuators: "false"
+        apps.tanzu.vmware.com/auto-configure-actuators: "true"
         apps.tanzu.vmware.com/has-tests: "true"
         apps.tanzu.vmware.com/workload-type: web
         carto.run/workload-name: inclusion
@@ -44,15 +46,15 @@ spec:
         services.conventions.carto.run/postgres: workload
         tanzu.app.live.view: "true"
         tanzu.app.live.view.application.actuator.path: actuator
-        tanzu.app.live.view.application.actuator.port: "8080"
+        tanzu.app.live.view.application.actuator.port: "8081"
         tanzu.app.live.view.application.flavours: spring-boot
         tanzu.app.live.view.application.name: inclusion
     spec:
       containers:
       - env:
         - name: JAVA_TOOL_OPTIONS
-          value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.health.probes.enabled="true" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: harbor.emea.end2end.link/tap/workloads/inclusion-prod-w01-s003@sha256:5f3d9dd8f146a0c044e5de3f355111e329369f5f2a68f938f17c245f068fcdc5
+          value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
+        image: harbor.emea.end2end.link/tap/workloads/inclusion-prod-w01-s003@sha256:8df1219f447c46f6efaae1a4260e14f04a058769ea18699fb87beb87683e0c19
         livenessProbe:
           httpGet:
             path: /livez
