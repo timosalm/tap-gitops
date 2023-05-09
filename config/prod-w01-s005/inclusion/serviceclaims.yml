@@ -19,6 +19,7 @@ metadata:
   name: inclusion-db
   annotations:
     autoscaling.knative.dev/min-scale: "5"
+    kapp.k14s.io/change-group: servicebinding.io/ServiceBindings
   labels:
     apis.apps.tanzu.vmware.com/register-api: "true"
     app.kubernetes.io/part-of: inclusion
