@@ -29,7 +29,7 @@ spec:
         carto.run/workload-name: spring-boot-crac-demo
     spec:
       containers:
-      - image: harbor.emea.end2end.link/tap/workloads/spring-boot-crac-demo-dev-space@sha256:5465e55f61d725de1647b3e623b748f243e7bc05fcc38486d4e65e1aeea7cf7c
+      - image: harbor.emea.end2end.link/tap/workloads/spring-boot-crac-demo-dev-space@sha256:bf28b71bbd6f5f66efa0bdc01c2107533f1e9d64143dbd2d7f0384a71fe40ccb
         name: workload
         resources: {}
         securityContext:
