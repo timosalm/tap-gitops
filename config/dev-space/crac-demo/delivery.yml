@@ -27,7 +27,7 @@ spec:
         carto.run/workload-name: crac-demo
     spec:
       containers:
-      - image: index.docker.io/sdeleuze/spring-boot-crac-demo@sha256:3626b297faf085bac978262d7ffed63887f781b94db0f3cc6aca71a1a4bd8d99
+      - image: index.docker.io/sdeleuze/spring-boot-crac-demo@sha256:f30f40f05c7e58b6cf542259fa0b43294738d58f9293ce293cf3ee3a434505e7
         name: workload
         resources: {}
         securityContext:
