@@ -33,8 +33,8 @@ spec:
   name: db
   service:
     apiVersion: services.apps.tanzu.vmware.com/v1alpha1
-    kind: ResourceClaim
-    name: db-binding-compatible
+    kind: ClassClaim
+    name: my-claim
   workload:
     apiVersion: serving.knative.dev/v1
     kind: Service
