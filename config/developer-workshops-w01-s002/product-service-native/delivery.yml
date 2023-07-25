@@ -28,8 +28,6 @@ spec:
           spring-boot-convention/app-live-view-connector-boot
           spring-boot-convention/app-live-view-appflavours-boot
         developer.conventions/target-containers: workload
-        kubectl.kubernetes.io/last-applied-configuration: |
-          {"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{},"labels":{"apps.tanzu.vmware.com/workload-type":"web"},"name":"product-service-native","namespace":"developer-workshops-w01-s002"},"spec":{"build":{"env":[{"name":"BP_JVM_VERSION","value":"17"},{"name":"BP_NATIVE_IMAGE","value":"true"},{"name":"BP_MAVEN_ACTIVE_PROFILES","value":"native"}]},"source":{"git":{"ref":{"branch":"developer-workshops-w01-s002"},"url":"https://gitea.emea.end2end.link/gitea_admin/product-service.git"}}}}
       labels:
         app.kubernetes.io/component: run
         apps.tanzu.vmware.com/auto-configure-actuators: "true"
@@ -44,9 +42,23 @@ spec:
     spec:
       containers:
       - env:
+        - name: MANAGEMENT_SERVER_PORT
+          value: "8081"
+        - name: MANAGEMENT_ENDPOINT_HEALTH_PROBES_ADD_ADDITIONAL_PATHS
+          value: "true"
+        - name: MANAGEMENT_ENDPOINT_HEALTH_SHOW_DETAILS
+          value: always
+        - name: MANAGEMENT_ENDPOINTS_WEB_BASE_PATH
+          value: /actuator
+        - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
+          value: '*'
+        - name: MANAGEMENT_HEALTH_PROBES_ENABLED
+          value: "true"
+        - name: SERVER_PORT
+          value: "8080"
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: harbor.emea.end2end.link/tap/workloads/product-service-native-developer-workshops-w01-s002@sha256:815288d7318480dac6bef4f15179a7775617959f978d001104431d021eff3969
+        image: harbor.emea.end2end.link/tap/workloads/product-service-native-developer-workshops-w01-s002@sha256:06ad0ff4a0df6c479406254493d7a1d1cbd91838a258dd9e362752a64f964153
         livenessProbe:
           httpGet:
             path: /livez
