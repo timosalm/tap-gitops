@@ -40,7 +40,7 @@ spec:
     metadata:
       annotations:
         boot.spring.io/actuator: http://:8081/actuator
-        boot.spring.io/version: 3.1.1
+        boot.spring.io/version: 3.1.2
         conventions.carto.run/applied-conventions: |-
           appliveview-sample/app-live-view-appflavour-check
           spring-boot-convention/auto-configure-actuators-check
@@ -54,7 +54,7 @@ spec:
           spring-boot-convention/app-live-view-appflavours-boot
           spring-boot-convention/service-intent-rabbitmq
         developer.conventions/target-containers: workload
-        services.conventions.carto.run/rabbitmq: amqp-client/5.17.0
+        services.conventions.carto.run/rabbitmq: amqp-client/5.17.1
       labels:
         app.kubernetes.io/component: run
         apps.tanzu.vmware.com/auto-configure-actuators: "true"
@@ -78,7 +78,7 @@ spec:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: harbor.emea.end2end.link/tap/workloads/shipping-service-developer-workshops-w01-s002@sha256:f1e5ee986832c3fc70cb10b8e0e5e0deed3d8e6f94702c2f9bd9d1a009e13f86
+        image: harbor.emea.end2end.link/tap/workloads/shipping-service-developer-workshops-w01-s002@sha256:4275eb5d7bf9d34d925474562c9d49f57d21f4d409127b5cbccd6d3041d8a556
         livenessProbe:
           httpGet:
             path: /livez
