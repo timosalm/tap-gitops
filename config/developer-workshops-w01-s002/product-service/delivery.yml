@@ -21,7 +21,7 @@ spec:
     metadata:
       annotations:
         boot.spring.io/actuator: http://:8081/actuator
-        boot.spring.io/version: 3.1.1
+        boot.spring.io/version: 3.1.2
         conventions.carto.run/applied-conventions: |-
           appliveview-sample/app-live-view-appflavour-check
           spring-boot-convention/auto-configure-actuators-check
@@ -56,7 +56,7 @@ spec:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: harbor.emea.end2end.link/tap/workloads/product-service-developer-workshops-w01-s002@sha256:b79d2d513a146b39e3adbedb65aab6f462afe98909d2c79c55bc97762beb1d26
+        image: harbor.emea.end2end.link/tap/workloads/product-service-developer-workshops-w01-s002@sha256:fe40a576f824f212232bbdf12f43a275139ee2d26b658a3487b6de31b64576de
         livenessProbe:
           httpGet:
             path: /livez
