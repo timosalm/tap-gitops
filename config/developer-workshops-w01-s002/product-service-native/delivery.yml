@@ -60,7 +60,7 @@ spec:
           value: "8080"
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: harbor.emea.end2end.link/tap/workloads/product-service-native-developer-workshops-w01-s002@sha256:06ad0ff4a0df6c479406254493d7a1d1cbd91838a258dd9e362752a64f964153
+        image: harbor.emea.end2end.link/tap/workloads/product-service-native-developer-workshops-w01-s002@sha256:19f6c5723585218e7a01e4406380d720f6196f56b8c1476155919d75f8fc2030
         livenessProbe:
           httpGet:
             path: /livez
