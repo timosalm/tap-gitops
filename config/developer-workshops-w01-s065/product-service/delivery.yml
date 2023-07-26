@@ -56,7 +56,7 @@ spec:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: harbor.emea.end2end.link/tap/workloads/product-service-developer-workshops-w01-s065@sha256:8b72c0bb990dd2bf56c71e9a647ec962e7510f41bf2df42d69f8ec0d5e894852
+        image: harbor.emea.end2end.link/tap/workloads/product-service-developer-workshops-w01-s065@sha256:285b976aebd9714100f840883e3b208aa60ca4c1fcc84d72c05c6a8485cae185
         livenessProbe:
           httpGet:
             path: /livez
