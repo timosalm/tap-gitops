@@ -32,7 +32,7 @@ spec:
         networking.knative.dev/visibility: cluster-local
     spec:
       containers:
-      - image: harbor.emea.end2end.link/tap/workloads/frontend-test-dev-space@sha256:526a133d47b11dffb8d825706e6b5f2a0aee589ad817bae6df783a82e1788ca7
+      - image: harbor.emea.end2end.link/tap/workloads/frontend-test-dev-space@sha256:75c836358a3852c491b3ad04553f4a9ce0f7436317e670984ca1fd82d88084aa
         name: workload
         resources: {}
         securityContext:
