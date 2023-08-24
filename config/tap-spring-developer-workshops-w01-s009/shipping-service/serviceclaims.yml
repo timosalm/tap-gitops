@@ -1,0 +1,87 @@
+apiVersion: kapp.k14s.io/v1alpha1
+kind: Config
+waitRules:
+- conditionMatchers:
+  - type: ServiceAvailable
+    status: "False"
+    failure: true
+  - type: ServiceAvailable
+    status: "True"
+    success: true
+  resourceMatchers:
+  - apiVersionKindMatcher:
+      apiVersion: servicebinding.io/v1alpha3
+      kind: ServiceBinding
+---
+apiVersion: servicebinding.io/v1alpha3
+kind: ServiceBinding
+metadata:
+  name: shipping-service-rmq
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{},"labels":{"app.kubernetes.io/part-of":"shipping-service","apps.tanzu.vmware.com/workload-type":"worker"},"name":"shipping-service","namespace":"tap-spring-developer-workshops-w01-s009"},"spec":{"build":{"env":[{"name":"BP_JVM_VERSION","value":"17"}]},"serviceClaims":[{"name":"rmq","ref":{"apiVersion":"services.apps.tanzu.vmware.com/v1alpha1","kind":"ClassClaim","name":"rmq-1"}},{"name":"config-server","ref":{"apiVersion":"services.apps.tanzu.vmware.com/v1alpha1","kind":"ResourceClaim","name":"shipping-config-server-claim"}},{"name":"tracing","ref":{"apiVersion":"services.apps.tanzu.vmware.com/v1alpha1","kind":"ResourceClaim","name":"zipkin-1"}}],"source":{"git":{"ref":{"branch":"tap-spring-developer-workshops-w01-s009"},"url":"https://gitea.emea.end2end.link/gitea_admin/shipping-service.git"}}}}
+    kapp.k14s.io/change-group: servicebinding.io/ServiceBindings
+  labels:
+    app.kubernetes.io/part-of: shipping-service
+    apps.tanzu.vmware.com/workload-type: worker
+    app.kubernetes.io/component: run
+    carto.run/workload-name: shipping-service
+spec:
+  name: rmq
+  service:
+    apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+    kind: ClassClaim
+    name: rmq-1
+  workload:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: shipping-service
+---
+apiVersion: servicebinding.io/v1alpha3
+kind: ServiceBinding
+metadata:
+  name: shipping-service-config-server
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{},"labels":{"app.kubernetes.io/part-of":"shipping-service","apps.tanzu.vmware.com/workload-type":"worker"},"name":"shipping-service","namespace":"tap-spring-developer-workshops-w01-s009"},"spec":{"build":{"env":[{"name":"BP_JVM_VERSION","value":"17"}]},"serviceClaims":[{"name":"rmq","ref":{"apiVersion":"services.apps.tanzu.vmware.com/v1alpha1","kind":"ClassClaim","name":"rmq-1"}},{"name":"config-server","ref":{"apiVersion":"services.apps.tanzu.vmware.com/v1alpha1","kind":"ResourceClaim","name":"shipping-config-server-claim"}},{"name":"tracing","ref":{"apiVersion":"services.apps.tanzu.vmware.com/v1alpha1","kind":"ResourceClaim","name":"zipkin-1"}}],"source":{"git":{"ref":{"branch":"tap-spring-developer-workshops-w01-s009"},"url":"https://gitea.emea.end2end.link/gitea_admin/shipping-service.git"}}}}
+    kapp.k14s.io/change-group: servicebinding.io/ServiceBindings
+  labels:
+    app.kubernetes.io/part-of: shipping-service
+    apps.tanzu.vmware.com/workload-type: worker
+    app.kubernetes.io/component: run
+    carto.run/workload-name: shipping-service
+spec:
+  name: config-server
+  service:
+    apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+    kind: ResourceClaim
+    name: shipping-config-server-claim
+  workload:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: shipping-service
+---
+apiVersion: servicebinding.io/v1alpha3
+kind: ServiceBinding
+metadata:
+  name: shipping-service-tracing
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{},"labels":{"app.kubernetes.io/part-of":"shipping-service","apps.tanzu.vmware.com/workload-type":"worker"},"name":"shipping-service","namespace":"tap-spring-developer-workshops-w01-s009"},"spec":{"build":{"env":[{"name":"BP_JVM_VERSION","value":"17"}]},"serviceClaims":[{"name":"rmq","ref":{"apiVersion":"services.apps.tanzu.vmware.com/v1alpha1","kind":"ClassClaim","name":"rmq-1"}},{"name":"config-server","ref":{"apiVersion":"services.apps.tanzu.vmware.com/v1alpha1","kind":"ResourceClaim","name":"shipping-config-server-claim"}},{"name":"tracing","ref":{"apiVersion":"services.apps.tanzu.vmware.com/v1alpha1","kind":"ResourceClaim","name":"zipkin-1"}}],"source":{"git":{"ref":{"branch":"tap-spring-developer-workshops-w01-s009"},"url":"https://gitea.emea.end2end.link/gitea_admin/shipping-service.git"}}}}
+    kapp.k14s.io/change-group: servicebinding.io/ServiceBindings
+  labels:
+    app.kubernetes.io/part-of: shipping-service
+    apps.tanzu.vmware.com/workload-type: worker
+    app.kubernetes.io/component: run
+    carto.run/workload-name: shipping-service
+spec:
+  name: tracing
+  service:
+    apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+    kind: ResourceClaim
+    name: zipkin-1
+  workload:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: shipping-service
+
