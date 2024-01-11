@@ -1,0 +1,33 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  name: inclusion.tap-saas.timosalm.de.20240111162022.0.0+build.ce41fff
+spec:
+  refName: inclusion.tap-saas.timosalm.de
+  version: 20240111162022.0.0+build.ce41fff
+  releaseNotes: |
+    Release v20240111162022.0.0+build.ce41fff of package inclusion.tap-saas.timosalm.de
+  template:
+    spec:
+      fetch:
+      - imgpkgBundle:
+          image: harbor.main.emea.end2end.link/tap/inclusion-tap-saas-bundle@sha256:7e63942e100f2f81679bc1ff057a399ba4069cb6a59bd41cffe62b52be2d6cc7
+      template:
+      - ytt:
+          paths:
+          - .
+      - kbld:
+          paths:
+          - .imgpkg/images.yml
+          - '-'
+      deploy:
+      - kapp: {}
+  valuesSchema:
+    openAPIv3:
+      type: object
+      additionalProperties: false
+      properties:
+        workload_name:
+          type: string
+          default: ""
+
