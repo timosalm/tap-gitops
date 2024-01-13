@@ -1,0 +1,70 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  name: inclusion.tap-saas.timosalm.de.20240113174550.0.0+build.ce41fff
+spec:
+  refName: inclusion.tap-saas.timosalm.de
+  version: 20240113174550.0.0+build.ce41fff
+  releaseNotes: |
+    Release v20240113174550.0.0+build.ce41fff of package inclusion.tap-saas.timosalm.de
+  template:
+    spec:
+      fetch:
+      - imgpkgBundle:
+          image: harbor.main.emea.end2end.link/tap/inclusion-tap-saas-bundle@sha256:a38c629962b9847e95187b1d890930bb53cf28e703fefc578418614f5abed16d
+      template:
+      - ytt:
+          paths:
+          - .
+      - kbld:
+          paths:
+          - .imgpkg/images.yml
+          - '-'
+      deploy:
+      - kapp: {}
+  valuesSchema:
+    openAPIv3:
+      type: object
+      additionalProperties: false
+      properties:
+        workload_name:
+          title: Workload name
+          type: string
+          default: ""
+        replicas:
+          title: Replicas
+          type: integer
+          default: 1
+        port:
+          title: Port
+          type: integer
+          default: 8080
+        hostname:
+          title: Hostname
+          type: string
+          default: ""
+        cluster_issuer:
+          title: Cluster Issuer
+          type: string
+          default: tap-ingress-selfsigned
+        http_route:
+          type: object
+          additionalProperties: false
+          nullable: true
+          properties:
+            gateways:
+              type: array
+              items:
+                type: object
+                additionalProperties: false
+                properties:
+                  protocol:
+                    type: string
+                    default: ""
+                  name:
+                    type: string
+                    default: ""
+              default:
+              - protocol: https
+                name: default-gateway
+
